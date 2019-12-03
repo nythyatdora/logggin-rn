@@ -61,14 +61,22 @@ function HomeScreenHeader(props) {
     );
 }
 
-function HomeScreenMain() {
-    return (<>
-        <View style={main.__wrapper}>
-            <Image style={main.__image_fit} source={require('./img/undraw_void_3ggu.png')}></Image>
-            <Text style={main.__welcome_text}>Home</Text>
-            <Text>{`helllo, ${headerTitle}`}</Text>
-        </View>
-    </>);
+class HomeScreenMain extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        let headerTitle = 'helllo, ' + this.props.navigation.getParam('username', 'man!');
+
+        return (<>
+            <View style={main.__wrapper}>
+                <Image style={main.__image_fit} source={require('./img/undraw_void_3ggu.png')}></Image>
+                <Text style={main.__welcome_text}>Home</Text>
+                <Text>{headerTitle}</Text>
+            </View>
+        </>);
+    }
 }
 
 export default class HomeScreenContainer extends React.Component {
@@ -84,7 +92,7 @@ export default class HomeScreenContainer extends React.Component {
         return (
             <>
                 <HomeScreenHeader {...this.props} />
-                <HomeScreenMain />
+                <HomeScreenMain {...this.props} />
             </>
         );
     }
